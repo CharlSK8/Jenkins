@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  tools {
-    nodejs 'node-19.8.1'
-  }
 
   options {
     timeout(time: 2, unit: 'MINUTES')
