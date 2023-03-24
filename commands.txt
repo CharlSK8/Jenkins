@@ -1,0 +1,20 @@
+1. Crear la imagen en base al Dockerfile
+docker build -t myjenkins-blueocean:2.387.1-1 .
+
+2. Ejecutar el contenedor con la imagen de Jenkins
+docker run --name jenkins-blueocean --restart=on-failure --detach --network jenkins --env DOCKER_HOST=tcp://docker:2376 --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 --publish 8080:8080 --publish 50000:50000 --volume jenkins-data:/var/jenkins_home --volume jenkins-docker-certs:/certs/client:ro myjenkins-blueocean:2.387.1-1 
+
+3. Obtener la initial password
+sudo docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
+
+4. Initial password Jenkins
+13c272026a4b434c9d6e268167217eea
+
+5. ssh
+SHA256:gDwE2Wl91KbJLBGLpXHz8EyppJ7+ulC+JLTyV14m8Xk
+
+6. Ingresar al contenedor como usuario root
+docker exec -u 0 -it 63b84c243cef /bin/bash
+
+7. Guardar los cambios en un contenedor
+docker commit 63b84c243cef learn/ping
